@@ -39,38 +39,38 @@ function Home() {
                 </div>
             </div>
 
-            <section class="features-icons bg-light text-center det-ails">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                                <div class="features-icons-icon d-flex  icon-bra-ails">
-                                    <i class="icon-screen-desktop m-auto text-primary icon-ails"></i>
+            <section className="features-icons bg-light text-center det-ails">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-4">
+                            <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                                <div className="features-icons-icon d-flex  icon-bra-ails">
+                                    <i className="icon-screen-desktop m-auto text-primary icon-ails"></i>
                                 </div>
                                 <h5>Home Comfort</h5>
-                                <p class="lead mb-0">
+                                <p className="lead mb-0">
                                     Learn from your home with all your comfort
                                 </p>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                                <div class="features-icons-icon d-flex  icon-bra-ails">
-                                    <i class="icon-layers m-auto text-primary icon-ails"></i>
+                        <div className="col-lg-4">
+                            <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                                <div className="features-icons-icon d-flex  icon-bra-ails">
+                                    <i className="icon-layers m-auto text-primary icon-ails"></i>
                                 </div>
                                 <h5>Best Teachers</h5>
-                                <p class="lead mb-0">
+                                <p className="lead mb-0">
                                     Learn from the best teachers in the world
                                 </p>
                             </div>
                         </div>
-                        <div class="col-lg-4">
-                            <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                                <div class="features-icons-icon d-flex  icon-bra-ails">
-                                    <i class="icon-check m-auto text-primary icon-ails"></i>
+                        <div className="col-lg-4">
+                            <div className="features-icons-item mx-auto mb-0 mb-lg-3">
+                                <div className="features-icons-icon d-flex  icon-bra-ails">
+                                    <i className="icon-check m-auto text-primary icon-ails"></i>
                                 </div>
                                 <h5>Report</h5>
-                                <p class="lead mb-0">
+                                <p className="lead mb-0">
                                     Get a detailed report of every classroom you
                                     attend
                                 </p>

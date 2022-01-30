@@ -54,20 +54,6 @@ const Room = ({ match }) => {
         "auth-token": localStorage.getItem("auth-token"),
     };
 
-    const fetchClassStatus = async () => {
-        await fetch(`${API_URL}/class/${roomId}`, {
-            mode: "cors",
-            headers: requestHeader,
-        })
-            .then(async (res) => {
-                const status = await res.json();
-                updateClassStatus(status.data.is_active);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
     const fetchUser = async () => {
         await fetch(`${API_URL}/user/dashboard`, {
             mode: "cors",
@@ -84,26 +70,33 @@ const Room = ({ match }) => {
             });
     };
 
-    fetchUser();
-
     useEffect(() => {
-        fetchClassStatus();
-
-        if (isClassActive) {
-            startConnection();
-        }
-    }, [isClassActive]);
+        fetchUser();
+        startConnection();
+    }, []);
 
     const startConnection = () => {
         const socket = io(API_URL, {
             query: {
                 token: localStorage.getItem("auth-token"),
+                roomId: roomId,
             },
+            transports: ["websocket"],
         });
 
         setSocketConnection(socket);
 
-        socket.emit("join-room", roomId);
+        socket.on("class-status", (classStatus) => {
+            updateClassStatus(classStatus);
+        });
+
+        socket.on("class-started", (classStatus) => {
+            updateClassStatus(classStatus);
+            window.location.reload();
+        });
+
+        socket.emit("join-class", roomId);
+
         socket.on(
             "user-connected",
             (onlineStudents, onlineTeachers, newUserName) => {
@@ -129,34 +122,12 @@ const Room = ({ match }) => {
     };
 
     const startClass = async () => {
-        await fetch(`${API_URL}/class`, {
-            mode: "cors",
-            method: "POST",
-            headers: requestHeader,
-            body: JSON.stringify({
-                number: roomId,
-                is_active: true,
-                started_at: Date.now(),
-                ended_at: null,
-            }),
-        })
-            .then(updateClassStatus(true))
-            .catch((err) => {
-                console.log(err);
-            });
+        socketConnection.emit("start-class", roomId);
+        window.location.reload();
     };
 
     const endClass = async () => {
-        await fetch(`${API_URL}/class/${roomId}`, {
-            mode: "cors",
-            method: "PUT",
-            body: JSON.stringify({ is_active: false, ended_at: Date.now() }),
-            headers: requestHeader,
-        })
-            .then(socketConnection.emit("class-end", roomId))
-            .catch((err) => {
-                console.log(err);
-            });
+        socketConnection.emit("class-end", roomId);
     };
 
     return (

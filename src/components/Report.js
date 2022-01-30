@@ -40,7 +40,7 @@ function Report() {
 
             <div>
                 {classes.map((class1, i) => (
-                    <Accordion defaultActiveKey="1">
+                    <Accordion defaultActiveKey="1" key={i}>
                         <Card>
                             <Accordion.Toggle
                                 as={Button}
@@ -50,7 +50,7 @@ function Report() {
                                 {class1.number}
                                 <Accordion.Collapse eventKey="0">
                                     <Card.Body>
-                                        <ClassLog key={i} classLogs={class1} />
+                                        <ClassLog classLogs={class1} />
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Accordion.Toggle>

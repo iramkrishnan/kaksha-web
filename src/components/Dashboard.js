@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import { API_URL } from "../constants/api";
 import GenerateClass from "./GenerateClass";
@@ -21,23 +21,36 @@ function Dashboard() {
         },
     };
 
-    axios
-        .get(`${API_URL}/user/dashboard`, requestHeader)
-        .then((res) => {
-            updateUser(
-                res.data.data.first_name,
-                res.data.data.last_name,
-                res.data.data.role
-            );
-        })
-        .catch((err) => console.log(err));
+    useEffect(() => {
+        const getUserDetails = () => {
+            axios
+                .get(`${API_URL}/user/dashboard`, requestHeader)
+                .then((res) => {
+                    console.log(res);
+                    updateUser(
+                        res.data.data.first_name,
+                        res.data.data.last_name,
+                        res.data.data.role
+                    );
+                })
+                .catch((err) => console.log(err));
+        };
+
+        getUserDetails();
+    }, []);
 
     return (
         <>
             <Header userName={firstName} isLoggedIn={true} />
-            <h2>
-                {firstName} {lastName}'s Dashboard ({role})
-            </h2>
+
+            {firstName ? (
+                <h2>
+                    {firstName} {lastName}'s Dashboard ({role})
+                </h2>
+            ) : (
+                ""
+            )}
+
             {role === "teacher" ? <GenerateClass /> : ""}
         </>
     );

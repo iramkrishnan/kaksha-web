@@ -1,7 +1,6 @@
 import ClassUserLog from "./ClassUserLog";
 
 function Report({ classLogs }) {
-    console.log(classLogs);
     return (
         <>
             <h2>Class - {classLogs.number}</h2>
